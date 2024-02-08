@@ -1,0 +1,9 @@
+.stack-work/
+build.sh
+log
+stack.yaml
+stack.yaml.lock
+xmonad-contrib/
+xmonad.hi
+xmonad.o
+xmonad/

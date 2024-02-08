@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# [... default stuff that your distro may throw in here ...] #
 
 # Set up an icon tray
 trayer --edge top --align right --SetDockType true --SetPartialStrut true \
@@ -10,6 +9,7 @@ xsetroot -cursor_name left_ptr
 
 # Set a nice background
 feh --bg-fill --no-fehbg ~/Imagens/Wallpapers/just-a-girls.jpg
+
 # Fire up screensaver
 xscreensaver -no-splash &
 
@@ -21,4 +21,8 @@ xcompmgr &
 
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
+fi
+
+if [ -x /usr/bin/blueman-applet ] ; then
+   blueman-applet --sm-disable &
 fi

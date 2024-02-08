@@ -8,7 +8,7 @@ import XMonad.Hooks.StatusBar.PP
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
-import XMonad.Util.Ungrab
+-- import XMonad.Util.Ungrab
 
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ThreeColumns
@@ -16,8 +16,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Hooks.EwmhDesktops
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Layout.Gaps
-
-
+import XMonad.Layout.Spacing
 
 main :: IO ()
 main = xmonad
@@ -26,7 +25,7 @@ main = xmonad
      . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
      $ myConfig
      {
-       layoutHook = gaps [(U, 10), (R, 10), (L, 10), (D, 10)] $Tall 1 (3/100) (1/2) ||| Full
+       layoutHook = gaps [(U,5), (R,5), (L,5), (D,5)] $ spacing 5 $ Tall 1 (6/100) (1/2)
      , startupHook = do
          spawn "~/.config/xmonad/scripts/startup.sh"
      }
@@ -58,7 +57,8 @@ myConfig = def
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-    [ className =? "Gimp" --> doFloat
+    [
+      className =? "Gimp" --> doFloat
     , isDialog            --> doFloat
     ]
 
@@ -72,7 +72,8 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
 
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppSep             = magenta " • "
+    {
+      ppSep             = magenta " • "
     , ppTitleSanitize   = xmobarStrip
     , ppCurrent         = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
     , ppHidden          = white . wrap " " ""
